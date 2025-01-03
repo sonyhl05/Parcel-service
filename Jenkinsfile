@@ -50,11 +50,11 @@ pipeline {
                 sh 'nohup mvn spring-boot:run &'
                 sleep(time: 15, unit: 'SECONDS') // Wait for the application to fully start
 
-                // Fetch the public IP and display the access URL
+                // Fetch the local IP and display the access URL
                 script {
-                    def localIp = sh(script: "hostname -I | awk -F " " '{print $1}'", returnStdout: true).trim()
+                    def localIp = sh(script: "hostname -I | awk '{print \$1}'", returnStdout: true).trim()
                     echo "The application is running and accessible at: http://${localIp}:8080"
-                     }
+                }
             }
         }
 
