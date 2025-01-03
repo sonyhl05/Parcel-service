@@ -52,9 +52,9 @@ pipeline {
 
                 // Fetch the public IP and display the access URL
                 script {
-                    def localIp = sh(script: "hostname -I | awk -F " " '{print $1}'", returnStdout: true).trim()
-                    echo "The application is running and accessible at: http://${localIp}:8080"
-                     }
+                    def publicIp = sh(script: "curl -s https://checkip.amazonaws.com", returnStdout: true).trim()
+                    echo "The application is running and accessible at: http://${publicIp}:8080"
+                }
             }
         }
 
